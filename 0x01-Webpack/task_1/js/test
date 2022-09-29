@@ -1,0 +1,4 @@
+jQuery(element).on('click', _.debounce(sendMail, 300, {
+  'leading': true,
+  'trailing': false
+}));
