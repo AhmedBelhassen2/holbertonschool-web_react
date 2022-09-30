@@ -16,14 +16,16 @@ const path = require('path');
           {
             test: /\.(png|jpe?g|gif|svg)$/i,
             use: [
-              {
-                loader: 'file-loader',
-                options:{
-                    name: "[name].[ext]",
-                    outputPath: "images",
-                }
+                'file-loader',
+                {
+                  loader: 'image-webpack-loader',
+                  options: {
+                    bypassOnDebug: true, // webpack@1.x
+                    disable: true, // webpack@2.x and newer
+                  }
                 }]
               },
             ],
           },
-      };
+      }; 
+       
