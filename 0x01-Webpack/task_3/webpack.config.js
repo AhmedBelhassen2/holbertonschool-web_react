@@ -12,6 +12,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'public'),
       },
+      optimization: {
+        splitChunks: {
+          chunks: 'all',
+        },
     plugins: [new CleanWebpackPlugin(), new HtmlWebpackPlugin()],
     performance: {
     hints: false,
