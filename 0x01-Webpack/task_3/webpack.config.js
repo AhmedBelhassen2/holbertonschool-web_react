@@ -1,5 +1,6 @@
 const path = require('path');
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
  module.exports = {
     mode: 'development',
     entry: {
@@ -11,6 +12,12 @@ const path = require('path');
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'public'),
       },
+    plugins: [new CleanWebpackPlugin(), new HtmlWebpackPlugin()],
+    performance: {
+    hints: false,
+    maxAssetSize: 1000000,
+    maxEntrypointSize: 1000000,
+  },
       devServer: {
         contentBase: path.join(__dirname, './public'),
         compress: true,
