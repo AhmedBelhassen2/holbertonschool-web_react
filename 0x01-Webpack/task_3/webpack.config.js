@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
  module.exports = {
     mode: 'development',
+    devtool: 'inline-source-map',
     entry: {
         header: './modules/header/header.js',
         body: './modules/body/body.js',
@@ -47,5 +48,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
               },
             ],
           },
-      }; 
+      } 
+    };
        
