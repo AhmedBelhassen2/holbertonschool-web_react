@@ -1,20 +1,34 @@
+import React from 'react';
+import Enzyme from 'enzyme';
 import { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import App from './App.js';
 
+Enzyme.configure({adapter: new Adapter()})
 
-it('App render with no crash', () => {
-  shallow(<App />);
-  expect(shallow(<App />).exists()).toEqual(true);
+
+let wrapper;
+
+beforeEach(() => {
+  wrapper = shallow(<App />);
 });
-it('App render class App-header', () => {
- shallow(<App />);
-  expect(shallow(<App />).find('div.App-header')).toHaveLength(1);
-});
-it('App render class App-body', () => {
-  shallow(<App />);
-  expect(shallow(<App />).find('div.App-body')).toHaveLength(1);
-});
-it('App render class App-footer', () => {
- shallow(<App />);
-  expect(shallow(<App />).find('div.App-footer')).toHaveLength(1);
+
+describe('testing component <App />', () => {
+  it('render without crashing', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders three list items', () => {
+    expect(wrapper.find('div.App')).toHaveLength(1);
+  })
+
+it ('should render a div with a className "App-header"', () => {
+  expect(wrapper.find('div.App-header')).toHaveLength(1);
+})
+it ('should render a div with a className "App-body"', () => {
+  expect(wrapper.find('div.App-body')).toHaveLength(1);
+})
+it ('should render a div with a className "App-footer"', () => {
+  expect(wrapper.find('div.App-footer')).toHaveLength(1);
+})
 });

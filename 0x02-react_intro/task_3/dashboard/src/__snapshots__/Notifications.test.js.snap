@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`testing component <App /> render without crashing 1`] = `ShallowWrapper {}`;
+
+exports[`testing component <Notifications /> render without crashing 1`] = `ShallowWrapper {}`;
