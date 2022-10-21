@@ -1,0 +1,12 @@
+  
+  .Notifications {
+    border: 1px dashed #e0344a;
+    padding: 16px;
+  }
+
+  .Notifications ul {
+    color: #e01d3f;
+  }
+  [data-notification-type="default"]  {
+    color: blue;
+  }
