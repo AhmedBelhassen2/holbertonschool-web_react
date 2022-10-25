@@ -8,9 +8,15 @@ Enzyme.configure({adapter: new Adapter()})
 
 
 let wrapper;
+let events = {};
+
 
 beforeEach(() => {
   wrapper = shallow(<App />); 
+  events = {}; // Empty our events before each test case
+  // Define the addEventListener method with a Jest mock function
+  document.addEventListener = jest.fn((event, callback) => {
+    events[event] = callback;
 });
 
 describe('testing component <App />', () => {
@@ -34,4 +40,5 @@ it ('should render a div with a className "App-footer"', () => {
   expect(wrapper.find("Footer")).toHaveLength(1);
 })
 
+})
 });

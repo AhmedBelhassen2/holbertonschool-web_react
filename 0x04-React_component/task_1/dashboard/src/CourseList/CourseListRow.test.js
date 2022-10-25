@@ -7,18 +7,16 @@ import CourseListRow from "./CourseListRow";
 Enzyme.configure({adapter: new Adapter()})
 
 
-let wrapper;
 
-beforeEach(() => {
-  wrapper = shallow(<CourseListRow />);
-});
+
 describe("<CourseListRow />", () => {
  
 
 
   
   it("When isHeader is false renders correctly two td elements within a tr element", () => {
-    
+    const wrapper = shallow(<CourseListRow />);
+
     expect(wrapper.find("tr")).toHaveLength(1);
     expect(wrapper.find("tr").children("td")).toHaveLength(2);
   });
