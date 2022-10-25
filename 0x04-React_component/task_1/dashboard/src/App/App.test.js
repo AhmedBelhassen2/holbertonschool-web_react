@@ -40,5 +40,16 @@ it ('should render a div with a className "App-footer"', () => {
   expect(wrapper.find("Footer")).toHaveLength(1);
 })
 
-})
+describe('logOut alerts with correct string', () => {
+	const myLogOut = jest.fn(() => undefined);
+	const appComp = mount(<App logOut={myLogOut} />);
+	const log = jest.spyOn(console, 'log');
+
+	expect(appComp.props.logOut);
+	expect(log);
+
+	jest.restoreAllMocks();
+
+});
+});
 });
