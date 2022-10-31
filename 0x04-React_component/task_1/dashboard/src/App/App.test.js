@@ -8,15 +8,9 @@ Enzyme.configure({adapter: new Adapter()})
 
 
 let wrapper;
-let events = {};
-
 
 beforeEach(() => {
-  wrapper = shallow(<App />); 
-  events = {}; // Empty our events before each test case
-  // Define the addEventListener method with a Jest mock function
-  document.addEventListener = jest.fn((event, callback) => {
-    events[event] = callback;
+  wrapper = shallow(<App />);
 });
 
 describe('testing component <App />', () => {
@@ -39,17 +33,4 @@ it ('should render a div with a className "App-body"', () => {
 it ('should render a div with a className "App-footer"', () => {
   expect(wrapper.find("Footer")).toHaveLength(1);
 })
-
-describe('logOut alerts with correct string', () => {
-	const myLogOut = jest.fn(() => undefined);
-	const appComp = mount(<App logOut={myLogOut} />);
-	const log = jest.spyOn(console, 'log');
-
-	expect(appComp.props.logOut);
-	expect(log);
-
-	jest.restoreAllMocks();
-
-});
-});
 });
