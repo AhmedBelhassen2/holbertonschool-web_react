@@ -40,10 +40,7 @@ class Notifications extends React.Component  {
         
       </button>
       <p>Here is the list of notifications</p>
-      <ul>
-              {this.props.listNotifications.length === 0 ? (<NotificationItem value='No new notification for now' type='no-new' />) : <></>}
-              {this.props.listNotifications.map((not) => (<NotificationItem key={not.id} type={not.type} value={not.value} html={not.html} markAsRead={() => {this.markAsRead(not.id)}} />))}
-            </ul>
+      
       <ul>
         <li data-priority="default">New course available</li>
         <li data-priority="urgent">New resume available</li>
