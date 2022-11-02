@@ -15,16 +15,27 @@ class Notifications extends Component {
   }
   shouldComponentUpdate(nextProps) {
     return (
-      nextProps.listNotifications.length > this.props.listNotifications.length
+      nextProps.listNotifications.length >
+        this.props.listNotifications.length ||
+      nextProps.displayDrawer !== this.props.displayDrawer
     );
   }
 
   render() {
-    const { displayDrawer, listNotifications } = this.props;
+    const {
+      displayDrawer,
+      listNotifications,
+      handleDisplayDrawer,
+      handleHideDrawer,
+    } = this.props;
     const show = css(displayDrawer ? styles.showOff : styles.showOn);
     return (
       <Fragment>
-        <div className={css(styles.menuItem)}>
+        <div
+          className={css(styles.menuItem)}
+          onClick={handleDisplayDrawer}
+          id='menuItem'
+        >
           <p className={show}>Your notifications</p>
         </div>
         {displayDrawer && (
@@ -47,7 +58,8 @@ class Notifications extends Component {
             <button
               type='button'
               aria-label='Close'
-              onClick={() => console.log('Close button has been clicked')}
+              onClick={handleHideDrawer}
+              id='close'
               style={{
                 display: 'inline-block',
                 position: 'absolute',
@@ -76,18 +88,26 @@ class Notifications extends Component {
 Notifications.defaultProps = {
   displayDrawer: false,
   listNotifications: [],
+  handleDisplayDrawer: () => {},
+  handleHideDrawer: () => {},
 };
 
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
   listNotifications: PropTypes.arrayOf(NotificationItemShape),
+  handleDisplayDrawer: PropTypes.func,
+  handleHideDrawer: PropTypes.func,
+};
+
+const cssVars = {
+  mainColor: "#e01d3f",
 };
 
 const screenSize = {
-  small: '@media screen and (max-width: 900px)',
+  small: "@media screen and (max-width: 900px)",
 };
 
-const opacityKf = {
+const opacityKeyframes = {
   from: {
     opacity: 0.5,
   },
@@ -97,69 +117,97 @@ const opacityKf = {
   },
 };
 
-const translateYkf = {
-  '0%': {
-    transform: 'translateY(0)',
+const translateYKeyframes = {
+  "0%": {
+    transform: "translateY(0)",
   },
 
-  '50%': {
-    transform: 'translateY(-5px)',
+  "50%": {
+    transform: "translateY(-5px)",
   },
 
-  '75%': {
-    transform: 'translateY(5px)',
+  "75%": {
+    transform: "translateY(5px)",
   },
 
-  '100%': {
-    transform: 'translateY(0)',
+  "100%": {
+    transform: "translateY(0)",
   },
 };
 
-const borderKf = {
-  '0%': {
-    border: `3px dashed cyan`,
+const borderKeyframes = {
+  "0%": {
+    border: `3px dashed deepSkyBlue`,
   },
 
-  '100%': {
-    border: `3px dashed #e0344a`,
+  "100%": {
+    border: `3px dashed ${cssVars.mainColor}`,
   },
 };
 
 const styles = StyleSheet.create({
-  notifications: {
-    fontSize: '20px',
-    border: 'thin dotted #e0344a',
-    padding: '4px 16px',
-    float: 'right',
-    animationName: [borderKf],
-    animationDuration: '0.8s',
-    animationIterationCount: 1,
-    animationFillMode: 'forwards',
-    [screenSize.small]: {
-      width: '90%',
-      border: 'none',
-      backgroundColor: 'white',
-    },
-  },
   menuItem: {
-    textAlign: 'right',
-    marginRight: '16px',
-    ':hover': {
-      cursor: 'pointer',
-      animationName: [opacityKf, translateYkf],
-      animationDuration: '1s, 0.5s',
+    float: "right",
+    ":hover": {
+      cursor: "pointer",
+      animationName: [opacityKeyframes, translateYKeyframes],
+      animationDuration: "1s, 0.5s",
       animationIterationCount: 3,
     },
   },
-  showOff: {
-    marginRight: '8px',
+
+  menuItemPNoShow: {
+    marginRight: "8px",
+    display: "none",
+  },
+
+  menuItemPShow: {
+    marginRight: "8px",
+  },
+
+  notifications: {
+    float: "right",
+    // border: `3px dashed ${cssVars.mainColor}`,
+    padding: "10px",
+    marginBottom: "20px",
+    animationName: [borderKeyframes],
+    animationDuration: "0.8s",
+    animationIterationCount: 1,
+    animationFillMode: "forwards",
+    ":hover": {
+      border: `3px dashed deepSkyBlue`,
+      // animationFillMode: "forwards",
+    },
     [screenSize.small]: {
-      display: 'none',
+      float: "none",
+      border: "none",
+      listStyle: "none",
+      padding: 0,
+      fontSize: "20px",
+      ":hover": {
+        border: "none",
+        // animationFillMode: "forwards",
+      },
+      position: "absolute",
+      background: "white",
+      height: "110vh",
+      width: "100vw",
     },
   },
 
-  showOn: {
-    marginRight: '8px',
+  notificationsButtonImage: {
+    width: "14px",
+  },
+
+  notificationsP: {
+    margin: 0,
+    marginTop: "15px",
+  },
+
+  notificationsUL: {
+    [screenSize.small]: {
+      padding: 0,
+    },
   },
 });
 
